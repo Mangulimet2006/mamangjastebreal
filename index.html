@@ -13,10 +13,23 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            background: #1a1a2e url('poker-bg.jpg') center center fixed;
+            background-size: cover;
+            position: relative;
             color: #fff;
             min-height: 100vh;
             overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: -1;
         }
 
         /* Welcome Animation */
@@ -26,7 +39,8 @@
             left: 0;
             width: 100%;
             height: 100vh;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            background: #1a1a2e url('poker-bg.jpg') center center fixed;
+            background-size: cover;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -34,9 +48,21 @@
             animation: fadeOut 1s ease-in-out 3s forwards;
         }
 
+        #welcome-screen::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+        }
+
         .welcome-text {
             text-align: center;
             animation: slideIn 1s ease-out;
+            position: relative;
+            z-index: 1;
         }
 
         .welcome-text h1 {
@@ -140,7 +166,6 @@
             justify-content: center;
             gap: 15px;
             margin: 20px 0;
-            animation: brandGlow 3s ease-in-out infinite;
         }
 
         .brand-text {
@@ -148,6 +173,42 @@
             font-weight: bold;
             color: #fff;
             text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        .poker-logo-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 10px;
+            animation: pokerFloat 3s ease-in-out infinite;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .poker-logo-img:first-child {
+            animation-delay: 0s;
+        }
+
+        .poker-logo-img:last-child {
+            animation-delay: 1.5s;
+        }
+
+        @keyframes pokerFloat {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg) scale(1);
+                box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+            }
+            25% {
+                transform: translateY(-10px) rotate(5deg) scale(1.1);
+                box-shadow: 0 0 30px rgba(255, 255, 255, 0.6);
+            }
+            50% {
+                transform: translateY(-15px) rotate(-5deg) scale(1.15);
+                box-shadow: 0 0 40px rgba(255, 255, 255, 0.8);
+            }
+            75% {
+                transform: translateY(-10px) rotate(5deg) scale(1.1);
+                box-shadow: 0 0 30px rgba(255, 255, 255, 0.6);
+            }
         }
 
         .poker-logo {
@@ -505,7 +566,7 @@
 <body>
     <!-- Background Music -->
     <audio id="bgMusic" loop>
-        <source src="YOUR_MUSIC_URL.mp3" type="audio/mpeg">
+        <source src="background-music.mp3" type="audio/mpeg">
     </audio>
     
     <!-- Music Control Button -->
@@ -528,9 +589,9 @@
             <header>
                 <div class="logo">SUNTIK ALL SOSMED</div>
                 <div class="brand-container">
-                    <span class="poker-logo">♠️</span>
+                    <img src="poker-logo.jpg" alt="Poker Logo" class="poker-logo-img">
                     <span class="brand-text">BY POKER CRUEL STORE</span>
-                    <span class="poker-logo">♥️</span>
+                    <img src="poker-logo.jpg" alt="Poker Logo" class="poker-logo-img">
                 </div>
                 
                 <!-- Animated Social Media Logos -->
