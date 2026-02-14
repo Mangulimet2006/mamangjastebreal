@@ -1,688 +1,676 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>POKER CRUEL STORE · Suntik All Sosmed</title>
+    <title>Suntik All Sosmed • Poker Cruel Store</title>
+    <!-- Font Awesome for icons (optional but nice) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         }
 
         body {
-            background: #faf3e8;  /* creamy putih coklat */
-            color: #3a2e28;
-            padding: 1.5rem 1rem 3rem;
-            min-height: 100vh;
+            background-color: #0b0b0b; /* hitam solid */
+            color: #f0f0f0;
             display: flex;
             flex-direction: column;
             align-items: center;
+            padding: 1rem 1rem 3rem;
         }
 
-        .container {
+        /* container utama white-transparent kotak */
+        .glass-container {
             max-width: 1300px;
             width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            border-radius: 32px;
+            padding: 2rem 1.8rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.8);
         }
 
-        /* welcome loading animation */
-        .welcome-screen {
-            background: #fff7ed;
-            border: 2px solid #b7a187;
-            border-radius: 40px;
-            padding: 2.5rem 1.5rem;
-            margin-bottom: 2.5rem;
-            text-align: center;
-            box-shadow: 0 12px 0 #8b6f4c;
-            color: #4f3f30;
-            transition: all 0.2s;
-        }
-
-        .welcome-screen h1 {
-            font-size: 2.2rem;
-            font-weight: 800;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            color: #5b3e1f;
-            text-shadow: 2px 2px 0 #eadac4;
-        }
-
-        .welcome-screen p {
-            font-size: 1.3rem;
-            background: #dac9b5;
-            display: inline-block;
-            padding: 0.4rem 2rem;
+        /* animasi welcome */
+        .welcome-wrapper {
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: 3px solid #fff;
+            margin-bottom: 2rem;
+            padding: 0.5rem 0;
+            background: rgba(0,0,0,0.7);
             border-radius: 60px;
-            color: #2d241b;
-            font-weight: 600;
-            margin-top: 1rem;
-            border: 1px solid #a78e70;
+            border: 1px solid white;
+            box-shadow: 0 0 15px cyan;
         }
 
-        /* tema hitam-putih pada elemen tertentu + border putih */
-        .card, .panel, .preview-card, table, .filter-box, .wa-block {
-            background: #ffffff; /* putih */
-            border: 3px solid #ffffff; /* border putih solid */
-            box-shadow: 0 8px 0 #aa8b6b, 0 4px 12px rgba(60, 40, 20, 0.15);
-            border-radius: 28px;
-            padding: 1.5rem 1.2rem;
+        .welcome-text {
+            display: inline-block;
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: white;
+            text-shadow: 0 0 8px magenta, 0 0 15px cyan;
+            padding-left: 100%;
+            animation: slideIn 8s linear infinite;
         }
 
-        /* kotak transparan efek */
-        .transparent-bg {
-            background: rgba(255, 250, 240, 0.7);
-            backdrop-filter: blur(2px);
+        @keyframes slideIn {
+            0% { transform: translateX(0%); }
+            20% { transform: translateX(-10%); }
+            100% { transform: translateX(-100%); }
         }
 
-        /* header store */
-        .store-head {
+        /* header */
+        .store-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            margin-bottom: 1.2rem;
+            margin-bottom: 1.5rem;
         }
-
-        .store-name {
+        .logo h1 {
             font-size: 2rem;
-            font-weight: 900;
-            color: #4e3a27;
-            text-transform: uppercase;
-            background: #eddccb;
-            padding: 0.2rem 1.8rem;
-            border-radius: 50px;
-            border: 2px solid white;
-            box-shadow: inset 0 -3px 0 #ad8e6b;
-        }
-
-        .badge {
-            background: #382e22;
-            color: #f0e1cf;
-            padding: 0.4rem 1.2rem;
-            border-radius: 40px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            border: 2px solid white;
-        }
-
-        /* layout utama: grid 3 kolom */
-        .order-grid {
-            display: grid;
-            grid-template-columns: 1.1fr 1.1fr 1.8fr;
-            gap: 1.6rem;
-            margin: 2rem 0 2.2rem;
-        }
-
-        @media (max-width: 900px) {
-            .order-grid {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-        }
-
-        /* panel umum */
-        .panel {
-            background: white;
-        }
-
-        .panel h3 {
-            font-size: 1.4rem;
-            margin-bottom: 1rem;
-            border-left: 12px solid #9c7e5f;
+            background: linear-gradient(45deg, #fff, #aaa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            border-left: 6px solid white;
             padding-left: 1rem;
-            color: #2b1f15;
-            font-weight: 800;
+        }
+        .logo span {
+            font-size: 1rem;
+            color: #ccc;
+            display: block;
+            margin-left: 1.2rem;
+        }
+        .contact-wa {
+            background: white;
+            color: black;
+            padding: 0.7rem 1.8rem;
+            border-radius: 40px;
+            font-weight: bold;
+            border: 2px solid #fff;
+            text-decoration: none;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 0 15px limegreen;
+        }
+        .contact-wa:hover {
+            background: transparent;
+            color: white;
+            border-color: limegreen;
         }
 
+        /* Tema: kotak transparan border putih */
+        .panel-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-top: 1.8rem;
+        }
+
+        .panel {
+            background: rgba(20, 20, 20, 0.4);
+            backdrop-filter: blur(4px);
+            border: 2px solid white;
+            border-radius: 28px;
+            padding: 1.5rem 1.2rem;
+            box-shadow: 0 0 20px rgba(255,255,255,0.1);
+            transition: 0.2s;
+        }
+
+        .panel-left {
+            flex: 1.2;
+            min-width: 280px;
+        }
+        .panel-center {
+            flex: 2;
+            min-width: 320px;
+        }
+        .panel-right {
+            flex: 1.5;
+            min-width: 280px;
+        }
+
+        /* judul panel */
+        .panel h2 {
+            font-size: 1.6rem;
+            border-bottom: 2px solid white;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+        .panel h3 {
+            font-size: 1.2rem;
+            margin: 1rem 0 0.8rem;
+            color: #ccc;
+        }
+
+        /* tombol layanan / kategori */
         .service-buttons, .category-buttons {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.6rem;
-            margin: 1rem 0 0.8rem;
+            gap: 0.8rem;
+            margin: 1rem 0;
         }
 
-        .service-btn, .cat-btn {
-            background: #f3e3d3;
-            border: 2px solid #b69573;
-            color: #2b1f15;
-            font-weight: 700;
-            padding: 0.6rem 1.2rem;
-            border-radius: 60px;
+        .srv-btn, .cat-btn {
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+            padding: 0.6rem 1.5rem;
+            border-radius: 40px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.15s;
             font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.1s ease;
-            box-shadow: 0 4px 0 #9b805f;
-            border: 2px solid white;
-            outline: 1px solid #b99e81;
-            flex: 1 0 auto;
-            max-width: 140px;
-            text-align: center;
+            box-shadow: 0 0 8px white;
         }
-
-        .service-btn.active, .cat-btn.active {
-            background: #8f6d49;
-            color: white;
-            box-shadow: 0 4px 0 #503f2e;
-            transform: translateY(1px);
-            border: 2px solid white;
-        }
-
-        .jenis-container {
-            background: #f4e8db;
-            border-radius: 40px;
-            padding: 1.2rem;
-            margin-top: 1.2rem;
-            border: 2px solid white;
-        }
-
-        .jenis-item {
+        .srv-btn.active, .cat-btn.active {
             background: white;
-            border-radius: 40px;
-            padding: 0.6rem 1rem;
-            margin: 0.4rem 0;
-            border: 1px solid #d4b48c;
-            font-weight: 500;
-            cursor: pointer;
-            transition: 0.1s;
-            box-shadow: 0 2px 0 #ba9f80;
-            color: #2d1f12;
+            color: black;
+            box-shadow: 0 0 20px cyan;
         }
 
-        .jenis-item:hover {
-            background: #cbb295;
-            color: white;
-        }
-
-        .preview-placeholder {
-            color: #6b4d30;
-            font-style: italic;
-            background: #fff3e6;
-            padding: 0.5rem 1rem;
+        .info-chip {
+            background: rgba(255,255,255,0.1);
             border-radius: 30px;
-            margin: 0.5rem 0;
-            border: 2px dashed #b08b63;
+            padding: 0.4rem 1rem;
+            font-size: 0.9rem;
+            border: 1px dashed white;
+            margin: 0.8rem 0;
         }
 
-        /* tabel harga */
-        .price-table-section {
-            background: white;
-            border-radius: 32px;
-            padding: 0.8rem 0.2rem 0.2rem 0.2rem;
-            border: 3px solid white;
-            box-shadow: 0 8px 0 #9d8264;
-            max-height: 440px;
-            overflow-y: auto;
-        }
-
+        /* tabel paket */
         .price-table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 1rem;
-            background: #fffcf8;
+            background: rgba(0,0,0,0.5);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid white;
         }
-
         .price-table th {
-            background: #e3cdb5;
-            color: #2d1f12;
-            font-weight: 800;
-            padding: 0.9rem 0.2rem;
-            font-size: 1.1rem;
-            border-bottom: 3px solid #ad8863;
-        }
-
-        .price-table td {
-            padding: 0.7rem 0.3rem;
-            border-bottom: 1px solid #e2cfba;
+            background: rgba(255,255,255,0.2);
             font-weight: 600;
-            color: #2d231b;
+            padding: 0.8rem 0.2rem;
+            border-bottom: 2px solid white;
         }
-
-        .price-table tr {
+        .price-table td {
+            padding: 0.6rem 0.3rem;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            text-align: center;
+        }
+        .price-table tr:last-child td {
+            border-bottom: none;
+        }
+        .price-table tbody tr {
             cursor: pointer;
             transition: 0.1s;
         }
-
-        .price-table tr:hover {
-            background: #dfc9b2;
-            color: black;
-            font-weight: 700;
-        }
-
-        .price-table td:last-child {
-            font-weight: 800;
-            color: #5f3e21;
-        }
-
-        .selected-row {
-            background: #c9ae8b !important;
-            color: #1e140e;
-            border: 2px solid white;
-        }
-
-        /* preview hasil pilihan */
-        .preview-final {
-            background: #efdecb;
-            border-radius: 30px;
-            padding: 1rem 1.6rem;
-            margin: 1.5rem 0 1.8rem;
-            border: 3px solid white;
-            box-shadow: 0 5px 0 #af8d66;
-        }
-
-        .preview-final p {
-            font-size: 1.2rem;
+        .price-table tbody tr:hover {
+            background: rgba(255,255,255,0.25);
             font-weight: 600;
         }
 
-        .wa-button {
-            background: #bfa07e;
-            border: none;
-            padding: 1.2rem 1.8rem;
-            border-radius: 60px;
-            font-weight: 800;
-            font-size: 1.5rem;
-            display: inline-block;
-            border: 4px solid white;
-            box-shadow: 0 8px 0 #6e543b;
-            transition: 0.1s;
-            text-align: center;
-            width: 100%;
-        }
-
-        .wa-button a {
-            color: #1d130b;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-
-        .wa-button:hover {
-            background: #ac8a65;
-            transform: translateY(2px);
-            box-shadow: 0 5px 0 #5f4632;
-        }
-
-        .footer-credit {
-            margin-top: 3.5rem;
-            text-align: center;
-            font-weight: 700;
-            background: #f0e1d1;
-            padding: 1rem 2rem;
-            border-radius: 100px;
-            border: 3px solid white;
-            font-size: 1.2rem;
-            color: #3e2d1d;
-        }
-
-        .small-note {
-            background: #fff1df;
-            border-radius: 30px;
-            padding: 0.5rem 1.2rem;
-            font-size: 0.9rem;
-            margin: 10px 0;
+        /* preview order card */
+        .preview-card {
+            background: rgba(0,0,0,0.6);
+            border-radius: 24px;
+            padding: 1.2rem;
             border: 2px solid white;
-        }
-
-        /* gambar yang diberikan (simulasi dengan ikon/background) */
-        .gambar-placeholder {
-            background: linear-gradient(145deg, #ad8e6f, #ebd5bd);
-            border: 4px solid white;
-            border-radius: 50px;
-            padding: 0.8rem 1.8rem;
             margin-bottom: 1.5rem;
+        }
+        .preview-row {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-            font-weight: 800;
-            color: #2a1c0e;
-            font-size: 1.2rem;
-            text-transform: uppercase;
-            box-shadow: 0 6px 0 #7f623f;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px dotted white;
+        }
+        .preview-label {
+            opacity: 0.8;
+        }
+        .preview-value {
+            font-weight: 700;
+            color: #fff;
+            text-shadow: 0 0 5px magenta;
         }
 
-        .gambar-placeholder span {
-            font-size: 2rem;
+        .copy-wa-row {
+            display: flex;
+            gap: 1rem;
+            margin: 1rem 0 0.5rem;
+        }
+        .copy-btn, .wa-order-btn {
+            flex: 1;
+            background: white;
+            color: black;
+            border: none;
+            padding: 0.8rem;
+            border-radius: 40px;
+            font-weight: bold;
+            border: 2px solid white;
+            cursor: pointer;
+            transition: 0.2s;
+            text-align: center;
+            text-decoration: none;
+            font-size: 1rem;
+        }
+        .copy-btn {
+            background: transparent;
+            color: white;
+        }
+        .wa-order-btn {
+            background: #25D366;
+            color: black;
+            border-color: #25D366;
+        }
+        .copy-btn:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        .wa-order-btn:hover {
+            background: transparent;
+            color: white;
+            border-color: white;
+        }
+
+        /* footer resmi */
+        .footer-note {
+            text-align: center;
+            margin-top: 2.5rem;
+            font-size: 1.1rem;
+            border-top: 2px solid white;
+            padding-top: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 0 0 30px 30px;
+            font-weight: 500;
+        }
+        .footer-note i {
+            color: magenta;
+        }
+
+        /* jenis dropdown / otomatis */
+        .jenis-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin: 1rem 0;
+        }
+        .jenis-item {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid white;
+            border-radius: 30px;
+            padding: 0.4rem 1.2rem;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: 0.1s;
+        }
+        .jenis-item.selected {
+            background: white;
+            color: black;
+            font-weight: 600;
         }
     </style>
 </head>
 <body>
-<div class="container">
+    <div class="glass-container">
+        <!-- animasi teks welcome -->
+        <div class="welcome-wrapper">
+            <div class="welcome-text">WELCOME TO WEBSITE SUNTIK ALL SOSMED BY POKER CRUEL ✦  WELCOME TO WEBSITE SUNTIK ALL SOSMED BY POKER CRUEL ✦</div>
+        </div>
 
-    <!-- WELCOME LOADING ANIMATION (tanpa loading sungguhan, pesan sambutan) -->
-    <div class="welcome-screen">
-        <h1>⚡ WELCOME TO WEBSITE SUNTIK ⚡</h1>
-        <p>BY POKER CRUEL STORE 🔥</p>
-        <div style="margin-top: 1rem; font-size: 1.2rem; background: #c7af93; width: fit-content; margin-left: auto; margin-right: auto; padding: 0.3rem 2rem; border-radius: 60px; border: 2px solid white;">loading sesi ... ready!</div>
-    </div>
-
-    <!-- GAMBAR (simulasi dari gambar yg diberikan, tema hitam putih border putih) -->
-    <div class="gambar-placeholder">
-        <span>🖤🤍</span> STROMY STORE · SUNTIK ALL SOSMED <span>🤍🖤</span>
-    </div>
-
-    <!-- pricelist seperti di gambar: kotak transparan / border putih -->
-    <div class="store-head">
-        <div class="store-name">💀 POKER CRUEL 💀</div>
-        <div class="badge">HITAM PUTIH · BORDER WHITE</div>
-    </div>
-
-    <!-- grid utama: layanan, kategori, preview + harga -->
-    <div class="order-grid">
-        <!-- Layanan panel -->
-        <div class="panel">
-            <h3>LAYANAN (klik salah satu)</h3>
-            <div class="service-buttons" id="serviceGroup">
-                <div class="service-btn active" data-service="TikTok">TikTok</div>
-                <div class="service-btn" data-service="WhatsApp">WhatsApp</div>
-                <div class="service-btn" data-service="Instagram">Instagram</div>
-                <div class="service-btn" data-service="Telegram">Telegram</div>
-                <div class="service-btn" data-service="YouTube">YouTube</div>
+        <!-- header with WA admin -->
+        <div class="store-header">
+            <div class="logo">
+                <h1>STROMY STORE</h1>
+                <span>SUNTIK ALL SOSMED • POKER CRUEL</span>
             </div>
-            <div class="small-note">Tersedia: TikTok, WhatsApp, Instagram, Telegram, YouTube.</div>
+            <a href="https://wa.me/6287780575005?text=hallo%20bang%20poker%20order%20suntik%20all%20sosmed" target="_blank" class="contact-wa">
+                <i class="fab fa-whatsapp" style="font-size: 1.6rem;"></i> ADMIN WA
+            </a>
+        </div>
 
-            <h3 style="margin-top: 1.5rem;">KATEGORI (klik salah satu)</h3>
-            <div class="category-buttons" id="categoryGroup">
-                <div class="cat-btn active" data-cat="Follower">Follower</div>
-                <div class="cat-btn" data-cat="Likes">Likes</div>
-                <div class="cat-btn" data-cat="Pengikut/Member">Pengikut/Member</div>
-                <div class="cat-btn" data-cat="Views">Views</div>
-                <div class="cat-btn" data-cat="Komentar">Komentar</div>
+        <!-- main panel interactive -->
+        <div class="panel-grid">
+            <!-- Layanan & Kategori panel kiri -->
+            <div class="panel panel-left">
+                <h2><i class="fas fa-sliders-h"></i> Layanan</h2>
+                <div class="service-buttons" id="serviceButtons">
+                    <button class="srv-btn active" data-service="TikTok">TikTok</button>
+                    <button class="srv-btn" data-service="WhatsApp">WhatsApp</button>
+                    <button class="srv-btn" data-service="Instagram">Instagram</button>
+                    <button class="srv-btn" data-service="Telegram">Telegram</button>
+                    <button class="srv-btn" data-service="YouTube">YouTube</button>
+                </div>
+                <div class="info-chip">Tersedia: TikTok, WhatsApp, Instagram, Telegram, YouTube.</div>
+
+                <h2 style="margin-top: 2rem;"><i class="fas fa-tags"></i> Kategori</h2>
+                <div class="category-buttons" id="categoryButtons">
+                    <button class="cat-btn active" data-category="Follower">Follower</button>
+                    <button class="cat-btn" data-category="Likes">Likes</button>
+                    <button class="cat-btn" data-category="Pengikut/Member">Pengikut/Member</button>
+                    <button class="cat-btn" data-category="Views">Views</button>
+                    <button class="cat-btn" data-category="Komentar">Komentar</button>
+                </div>
+                <div class="info-chip">Follower, likes, pengikut/member, views, komentar.</div>
+
+                <!-- Jenis (otomatis muncul) -->
+                <div id="jenisContainer" style="margin-top: 1.8rem;">
+                    <h3><i class="fas fa-tasks"></i> Jenis Kategori (otomatis)</h3>
+                    <div class="jenis-options" id="jenisList"></div>
+                </div>
             </div>
-            <div class="small-note">Follower, likes, pengikut/member, views, komentar.</div>
 
-            <!-- Jenis Kategori (muncul otomatis) -->
-            <div class="jenis-container" id="jenisPanel">
-                <div style="font-weight: 700; margin-bottom: 8px;">📌 JENIS (otomatis)</div>
-                <div id="jenisList"></div>
-                <div class="preview-placeholder" id="jenisHint">Pilih layanan & kategori</div>
+            <!-- Preview Pesanan + tabel harga dinamis -->
+            <div class="panel panel-center">
+                <h2><i class="fas fa-eye"></i> Preview Pesanan</h2>
+                <div class="preview-card" id="previewOrder">
+                    <div class="preview-row"><span class="preview-label">Layanan:</span> <span class="preview-value" id="previewLayanan">TikTok</span></div>
+                    <div class="preview-row"><span class="preview-label">Kategori:</span> <span class="preview-value" id="previewKategori">Follower</span></div>
+                    <div class="preview-row"><span class="preview-label">Jenis:</span> <span class="preview-value" id="previewJenis">Follower TikTok</span></div>
+                </div>
+
+                <h3 style="display: flex; gap: 10px;">📋 Klik baris untuk pilih paket</h3>
+                <div style="max-height: 360px; overflow-y: auto; border: 1px solid white; border-radius: 24px;">
+                    <table class="price-table" id="priceTable">
+                        <thead><tr><th>Jumlah</th><th>Harga</th></tr></thead>
+                        <tbody id="tableBody"></tbody>
+                    </table>
+                </div>
+
+                <!-- preview hasil pilihan (ringkasan) -->
+                <div style="margin-top: 1.5rem;" class="preview-card" id="selectedPaketPreview">
+                    <div class="preview-row"><span>Paket dipilih:</span> <span id="selectedDetail">—</span></div>
+                    <div class="preview-row"><span>Harga:</span> <span id="selectedPrice">—</span></div>
+                </div>
+
+                <div class="copy-wa-row">
+                    <button class="copy-btn" id="copyPreviewBtn"><i class="far fa-copy"></i> Copy</button>
+                    <a href="#" id="waOrderLink" class="wa-order-btn" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp Admin</a>
+                </div>
+                <div style="font-size: 0.85rem; text-align: center;">Klik salah satu baris, lalu order via WA</div>
+            </div>
+
+            <!-- Preview panel kanan (daftar harga cepat) -->
+            <div class="panel panel-right">
+                <h2><i class="fas fa-star"></i> Preview harga</h2>
+                <div id="quickPreview" style="background: rgba(0,0,0,0.3); border-radius: 20px; padding: 0.5rem; border: 1px solid white; max-height: 500px; overflow-y: auto;">
+                    <!-- akan diisi oleh js: tampilkan 5 baris pertama dari tabel aktif -->
+                </div>
+                <div class="info-chip" style="margin-top: 1rem;">Layanan: <span id="quickServiceLabel">TikTok</span> • Kategori: <span id="quickCategoryLabel">Follower</span></div>
             </div>
         </div>
 
-        <!-- PREVIEW & TABEL PAKET (harga) -->
-        <div class="panel" style="grid-column: span 2; display: flex; flex-direction: column;">
-            <h3>📋 PREVIEW PESANAN (hasil pilihan)</h3>
-            <div id="previewHeader" class="preview-final">
-                <p>Layanan: <span id="showLayanan">TikTok</span>  |  Kategori: <span id="showKategori">Follower</span></p>
-                <p id="showJenisSpan">Jenis: <span id="showJenis">Follower TikTok</span></p>
-                <p style="font-size: 1rem; color: #3e2a19;">Klik salah satu baris untuk memilih paket.</p>
-            </div>
-
-            <!-- tabel harga scroll -->
-            <div class="price-table-section" id="priceTableContainer">
-                <table class="price-table" id="priceTable">
-                    <thead>
-                        <tr><th>Jumlah</th><th>Harga</th></tr>
-                    </thead>
-                    <tbody id="tableBody">
-                        <!-- diisi javascript -->
-                    </tbody>
-                </table>
-            </div>
-
-            <!-- preview pilihan -->
-            <div style="margin-top: 1rem;" class="preview-final" id="selectedPreviewBlock">
-                <p>🔹 Pilihan sementara: <span id="selectedPaket">(klik baris)</span></p>
-            </div>
+        <!-- Footer resmi -->
+        <div class="footer-note">
+            <i class="fas fa-bolt"></i> RESMI WEBSITE SUNTIK FOLLOWERS ALL SOSMED POKER CRUEL STORE <i class="fas fa-bolt"></i>
         </div>
     </div>
 
-    <!-- ORDER VIA WHATSAPP -->
-    <div class="wa-button" id="waOrderBtn">
-        <a href="https://wa.me/6287780575005?text=hallo%20bang%20poker%20order%20suntik%20all%20sosmed" target="_blank">
-            💬 ORDER LANGSUNG KE WHATSAPP ADMIN
-        </a>
-    </div>
+    <script>
+        (function() {
+            // ---------- DATA HARGA (berdasarkan gambar) ----------
+            const priceData = {
+                // TikTok
+                TikTok_Follower: {
+                    jenis: "Follower TikTok",
+                    data: [[100,"4K"],[200,"6K"],[300,"7K"],[400,"8K"],[500,"10K"],[600,"11K"],[700,"12K"],[800,"13K"],[900,"14K"],[1000,"20K"]]
+                },
+                TikTok_Likes: {
+                    jenis: "Likes TikTok",
+                    data: [[1000,"4K"],[2000,"6K"],[3000,"8K"],[4000,"10K"],[5000,"12K"],[6000,"14K"],[7000,"16K"],[8000,"18K"],[9000,"20K"],[10000,"25K"]]
+                },
+                TikTok_Views: {
+                    jenis: "Views TikTok",
+                    data: [[4000,"2K"],[8000,"3K"],[12000,"4K"],[16000,"5K"],[20000,"6K"],[24000,"7K"],[28000,"8K"],[32000,"9K"],[36000,"10K"],[40000,"15K"]]
+                },
+                TikTok_Komentar: {
+                    jenis: "Komentar TikTok",
+                    data: [[40,"2K"],[80,"3K"],[120,"4K"],[160,"5K"],[200,"6K"],[240,"7K"],[280,"8K"],[320,"9K"],[360,"10K"],[400,"13K"]]
+                },
+                // WhatsApp
+                WhatsApp_Pengikut/Member: {
+                    jenis: "WhatsApp Member",
+                    data: [[50,"3K"],[100,"6K"],[150,"9K"],[200,"12K"],[250,"15K"],[300,"17K"],[350,"19K"],[400,"21K"],[450,"22K"],[500,"23K"]]
+                },
+                // Instagram
+                Instagram_Follower: {
+                    jenis: "Follower Instagram",
+                    data: [[100,"3K"],[200,"5K"],[300,"7K"],[400,"9K"],[500,"11K"],[600,"12K"],[700,"13K"],[800,"14K"],[900,"15K"],[1000,"16K"]]
+                },
+                Instagram_Likes: {
+                    jenis: "Likes Instagram",
+                    data: [[500,"4K"],[1000,"7K"],[1500,"10K"],[2000,"13K"],[2500,"15K"],[3000,"17K"],[3500,"19K"],[4000,"21K"],[4500,"22K"],[5000,"25K"]]
+                },
+                Instagram_Views: {
+                    jenis: "Views Instagram",
+                    data: [[4000,"3K"],[8000,"4K"],[12000,"5K"],[16000,"6K"],[20000,"7K"],[24000,"8K"],[28000,"9K"],[32000,"10K"],[36000,"11K"],[40000,"15K"]]
+                },
+                Instagram_Komentar: {
+                    jenis: "Komentar Instagram",
+                    data: [[40,"2K"],[80,"3K"],[120,"4K"],[160,"5K"],[200,"6K"],[240,"7K"],[280,"8K"],[320,"9K"],[360,"10K"],[400,"13K"]]
+                },
+                Telegram_Pengikut/Member: {
+                    jenis: "Telegram No Reffil",
+                    data: [[100,"1K"],[200,"2K"],[300,"3K"],[400,"4K"],[500,"5K"],[600,"6K"],[700,"7K"],[800,"8K"],[900,"9K"],[1000,"10K"]]
+                },
+                YouTube_Likes: {
+                    jenis: "Likes YouTube",
+                    data: [[500,"4K"],[1000,"6K"],[1500,"8K"],[2000,"10K"],[2500,"12K"],[3000,"14K"],[3500,"16K"],[4000,"18K"],[4500,"19K"],[5000,"20K"]]
+                },
+                YouTube_Views: {
+                    jenis: "Views YouTube",
+                    data: [[100,"3K"],[200,"6K"],[300,"9K"],[400,"11K"],[500,"13K"],[600,"15K"],[700,"16K"],[800,"18K"],[900,"20K"],[1000,"25K"]]
+                }
+                // Komentar YouTube? tidak ada di gambar, tambahan jika perlu nanti pakai data lain, abaikan.
+            };
 
-    <!-- footer resmi -->
-    <div class="footer-credit">
-        ⚡ resmi website suntik followers all sosmed POKER CRUEL STORE ⚡
-    </div>
+            // Mapping utk mendapatkan key
+            function getKey(service, category) {
+                if (service === "TikTok") {
+                    if (category === "Follower") return "TikTok_Follower";
+                    if (category === "Likes") return "TikTok_Likes";
+                    if (category === "Views") return "TikTok_Views";
+                    if (category === "Komentar") return "TikTok_Komentar";
+                }
+                if (service === "WhatsApp" && category === "Pengikut/Member") return "WhatsApp_Pengikut/Member";
+                if (service === "Instagram") {
+                    if (category === "Follower") return "Instagram_Follower";
+                    if (category === "Likes") return "Instagram_Likes";
+                    if (category === "Views") return "Instagram_Views";
+                    if (category === "Komentar") return "Instagram_Komentar";
+                }
+                if (service === "Telegram" && category === "Pengikut/Member") return "Telegram_Pengikut/Member";
+                if (service === "YouTube") {
+                    if (category === "Likes") return "YouTube_Likes";
+                    if (category === "Views") return "YouTube_Views";
+                }
+                return null;
+            }
 
-    <!-- kecil: Copy / WhatsApp (seperti referensi) -->
-    <div style="display: flex; justify-content: flex-end; margin-top: 1rem; gap: 20px; font-weight: 600;">
-        <span style="background: #eee3d7; padding: 8px 25px; border-radius: 40px; border: 2px solid white;">📋 Copy</span>
-        <span style="background: #25D366; color: #1f2b1a; padding: 8px 25px; border-radius: 40px; border: 2px solid white;">WhatsApp Admin</span>
-    </div>
-</div>
-
-<script>
-    (function() {
-        // State
-        let currentService = 'TikTok';
-        let currentCategory = 'Follower';
-        let currentJenis = 'Follower TikTok'; // default
-        let selectedPaket = ''; // misal "100 Follower = 4K"
-
-        // Data lengkap mengikuti deskripsi
-        const priceData = {
-            // TIKTOK
-            'TikTok_Follower': {
-                jenis: 'Follower TikTok',
-                paket: [
-                    { jumlah: '100 Follower', harga: '4K' }, { jumlah: '200 Follower', harga: '6K' }, { jumlah: '300 Follower', harga: '7K' },
-                    { jumlah: '400 Follower', harga: '8K' }, { jumlah: '500 Follower', harga: '10K' }, { jumlah: '600 Follower', harga: '11K' },
-                    { jumlah: '700 Follower', harga: '12K' }, { jumlah: '800 Follower', harga: '13K' }, { jumlah: '900 Follower', harga: '14K' },
-                    { jumlah: '1000 Follower', harga: '20K' }
-                ] },
-            'TikTok_Likes': {
-                jenis: 'Likes TikTok',
-                paket: [
-                    { jumlah: '1000 Likes', harga: '4K' }, { jumlah: '2000 Likes', harga: '6K' }, { jumlah: '3000 Likes', harga: '8K' },
-                    { jumlah: '4000 Likes', harga: '10K' }, { jumlah: '5000 Likes', harga: '12K' }, { jumlah: '6000 Likes', harga: '14K' },
-                    { jumlah: '7000 Likes', harga: '16K' }, { jumlah: '8000 Likes', harga: '18K' }, { jumlah: '9000 Likes', harga: '20K' },
-                    { jumlah: '10000 Likes', harga: '25K' }
-                ] },
-            'TikTok_Views': {
-                jenis: 'Views TikTok',
-                paket: [
-                    { jumlah: '4000 Views', harga: '2K' }, { jumlah: '8000 Views', harga: '3K' }, { jumlah: '12000 Views', harga: '4K' },
-                    { jumlah: '16000 Views', harga: '5K' }, { jumlah: '20000 Views', harga: '6K' }, { jumlah: '24000 Views', harga: '7K' },
-                    { jumlah: '28000 Views', harga: '8K' }, { jumlah: '32000 Views', harga: '9K' }, { jumlah: '36000 Views', harga: '10K' },
-                    { jumlah: '40000 Views', harga: '15K' }
-                ] },
-            'TikTok_Komentar': {
-                jenis: 'Komentar TikTok',
-                paket: [
-                    { jumlah: '40 Komentar', harga: '2K' }, { jumlah: '80 Komentar', harga: '3K' }, { jumlah: '120 Komentar', harga: '4K' },
-                    { jumlah: '160 Komentar', harga: '5K' }, { jumlah: '200 Komentar', harga: '6K' }, { jumlah: '240 Komentar', harga: '7K' },
-                    { jumlah: '280 Komentar', harga: '8K' }, { jumlah: '320 Komentar', harga: '9K' }, { jumlah: '360 Komentar', harga: '10K' },
-                    { jumlah: '400 Komentar', harga: '13K' }
-                ] },
-            // WHATSAPP (khusus Pengikut/Member)
-            'WhatsApp_Pengikut/Member': {
-                jenis: 'WhatsApp Member',
-                paket: [
-                    { jumlah: '50 Pengikut', harga: '3K' }, { jumlah: '100 Pengikut', harga: '6K' }, { jumlah: '150 Pengikut', harga: '9K' },
-                    { jumlah: '200 Pengikut', harga: '12K' }, { jumlah: '250 Pengikut', harga: '15K' }, { jumlah: '300 Pengikut', harga: '17K' },
-                    { jumlah: '350 Pengikut', harga: '19K' }, { jumlah: '400 Pengikut', harga: '21K' }, { jumlah: '450 Pengikut', harga: '22K' },
-                    { jumlah: '500 Pengikut', harga: '23K' }
-                ] },
-            // INSTAGRAM
-            'Instagram_Follower': {
-                jenis: 'Follower Instagram',
-                paket: [
-                    { jumlah: '100 Follower', harga: '3K' }, { jumlah: '200 Follower', harga: '5K' }, { jumlah: '300 Follower', harga: '7K' },
-                    { jumlah: '400 Follower', harga: '9K' }, { jumlah: '500 Follower', harga: '11K' }, { jumlah: '600 Follower', harga: '12K' },
-                    { jumlah: '700 Follower', harga: '13K' }, { jumlah: '800 Follower', harga: '14K' }, { jumlah: '900 Follower', harga: '15K' },
-                    { jumlah: '1000 Follower', harga: '16K' }
-                ] },
-            'Instagram_Likes': {
-                jenis: 'Likes Instagram',
-                paket: [
-                    { jumlah: '500 Likes', harga: '4K' }, { jumlah: '1000 Likes', harga: '7K' }, { jumlah: '1500 Likes', harga: '10K' },
-                    { jumlah: '2000 Likes', harga: '13K' }, { jumlah: '2500 Likes', harga: '15K' }, { jumlah: '3000 Likes', harga: '17K' },
-                    { jumlah: '3500 Likes', harga: '19K' }, { jumlah: '4000 Likes', harga: '21K' }, { jumlah: '4500 Likes', harga: '22K' },
-                    { jumlah: '5000 Likes', harga: '25K' }
-                ] },
-            'Instagram_Views': {
-                jenis: 'Views Instagram',
-                paket: [
-                    { jumlah: '4000 Views', harga: '3K' }, { jumlah: '8000 Views', harga: '4K' }, { jumlah: '12000 Views', harga: '5K' },
-                    { jumlah: '16000 Views', harga: '6K' }, { jumlah: '20000 Views', harga: '7K' }, { jumlah: '24000 Views', harga: '8K' },
-                    { jumlah: '28000 Views', harga: '9K' }, { jumlah: '32000 Views', harga: '10K' }, { jumlah: '36000 Views', harga: '11K' },
-                    { jumlah: '40000 Views', harga: '15K' }
-                ] },
-            'Instagram_Komentar': {
-                jenis: 'Komentar Instagram',
-                paket: [
-                    { jumlah: '40 Komentar', harga: '2K' }, { jumlah: '80 Komentar', harga: '3K' }, { jumlah: '120 Komentar', harga: '4K' },
-                    { jumlah: '160 Komentar', harga: '5K' }, { jumlah: '200 Komentar', harga: '6K' }, { jumlah: '240 Komentar', harga: '7K' },
-                    { jumlah: '280 Komentar', harga: '8K' }, { jumlah: '320 Komentar', harga: '9K' }, { jumlah: '360 Komentar', harga: '10K' },
-                    { jumlah: '400 Komentar', harga: '13K' }
-                ] },
-            // TELEGRAM (Pengikut)
-            'Telegram_Pengikut/Member': {
-                jenis: 'Telegram No Reffil',
-                paket: [
-                    { jumlah: '100 Pengikut', harga: '1K' }, { jumlah: '200 Pengikut', harga: '2K' }, { jumlah: '300 Pengikut', harga: '3K' },
-                    { jumlah: '400 Pengikut', harga: '4K' }, { jumlah: '500 Pengikut', harga: '5K' }, { jumlah: '600 Pengikut', harga: '6K' },
-                    { jumlah: '700 Pengikut', harga: '7K' }, { jumlah: '800 Pengikut', harga: '8K' }, { jumlah: '900 Pengikut', harga: '9K' },
-                    { jumlah: '1000 Pengikut', harga: '10K' }
-                ] },
-            // YOUTUBE Likes & Views
-            'YouTube_Likes': {
-                jenis: 'Likes YouTube',
-                paket: [
-                    { jumlah: '500 Likes', harga: '4K' }, { jumlah: '1000 Likes', harga: '6K' }, { jumlah: '1500 Likes', harga: '8K' },
-                    { jumlah: '2000 Likes', harga: '10K' }, { jumlah: '2500 Likes', harga: '12K' }, { jumlah: '3000 Likes', harga: '14K' },
-                    { jumlah: '3500 Likes', harga: '16K' }, { jumlah: '4000 Likes', harga: '18K' }, { jumlah: '4500 Likes', harga: '19K' },
-                    { jumlah: '5000 Likes', harga: '20K' }
-                ] },
-            'YouTube_Views': {
-                jenis: 'Views YouTube',
-                paket: [
-                    { jumlah: '100 Views', harga: '3K' }, { jumlah: '200 Views', harga: '6K' }, { jumlah: '300 Views', harga: '9K' },
-                    { jumlah: '400 Views', harga: '11K' }, { jumlah: '500 Views', harga: '13K' }, { jumlah: '600 Views', harga: '15K' },
-                    { jumlah: '700 Views', harga: '16K' }, { jumlah: '800 Views', harga: '18K' }, { jumlah: '900 Views', harga: '20K' },
-                    { jumlah: '1000 Views', harga: '25K' }
-                ] },
-        };
-
-        // mapping untuk jenis dinamis (untuk ditampilkan di panel jenis)
-        function getJenisOptions(service, cat) {
-            if (service === 'TikTok' && cat === 'Follower') return ['Follower TikTok', 'Follower REFFIL 30 days', 'Follower Indo No REFFIL', 'Follower Indo REFFIL 30 Days'];
-            if (service === 'Instagram' && cat === 'Follower') return ['Follower Instagram'];
-            if (service === 'Telegram' && cat === 'Pengikut/Member') return ['Telegram No Reffil'];
-            if (service === 'WhatsApp' && cat === 'Pengikut/Member') return ['WhatsApp Member'];
-            if (service === 'YouTube' && cat === 'Likes') return ['Likes YouTube'];
-            if (service === 'YouTube' && cat === 'Views') return ['Views YouTube'];
-            if (cat === 'Likes') return [`${service} Likes`];
-            if (cat === 'Views') return [`${service} Views`];
-            if (cat === 'Komentar') return [`${service} Komentar`];
-            if (cat === 'Follower' && service==='TikTok') return ['Follower TikTok','Follower REFFIL 30 days','Follower Indo No REFFIL','Follower Indo REFFIL 30 Days'];
-            if (cat === 'Follower' && service==='Instagram') return ['Follower Instagram'];
-            return [`${service} ${cat}`];
-        }
-
-        function renderJenis() {
+            // elemen2
+            const srvBtns = document.querySelectorAll('.srv-btn');
+            const catBtns = document.querySelectorAll('.cat-btn');
+            const previewLayanan = document.getElementById('previewLayanan');
+            const previewKategori = document.getElementById('previewKategori');
+            const previewJenis = document.getElementById('previewJenis');
+            const tableBody = document.getElementById('tableBody');
             const jenisListDiv = document.getElementById('jenisList');
-            const hint = document.getElementById('jenisHint');
-            const options = getJenisOptions(currentService, currentCategory);
-            if (options.length) {
-                hint.style.display = 'none';
+            const selectedDetailSpan = document.getElementById('selectedDetail');
+            const selectedPriceSpan = document.getElementById('selectedPrice');
+            const waOrderLink = document.getElementById('waOrderLink');
+            const copyBtn = document.getElementById('copyPreviewBtn');
+            const quickPreviewDiv = document.getElementById('quickPreview');
+            const quickServiceLabel = document.getElementById('quickServiceLabel');
+            const quickCategoryLabel = document.getElementById('quickCategoryLabel');
+
+            let currentService = "TikTok";
+            let currentCategory = "Follower";
+            let currentJenis = "Follower TikTok"; // default
+            let selectedPaket = { jumlah: null, harga: null };
+
+            // inisialisasi
+            function updateUI() {
+                previewLayanan.textContent = currentService;
+                previewKategori.textContent = currentCategory;
+                quickServiceLabel.textContent = currentService;
+                quickCategoryLabel.textContent = currentCategory;
+
+                // Tentukan jenis2 yang mungkin muncul (otomatis)
+                let jenisOptions = [];
+                if (currentService === "TikTok" && currentCategory === "Follower") jenisOptions = ["Follower TikTok", "Follower Indo REFFIL 30 Days", "Follower REFFIL 30 days", "Follower Indo No REFFIL"];
+                else if (currentService === "TikTok" && currentCategory === "Likes") jenisOptions = ["Likes TikTok"];
+                else if (currentService === "TikTok" && currentCategory === "Views") jenisOptions = ["Views TikTok"];
+                else if (currentService === "TikTok" && currentCategory === "Komentar") jenisOptions = ["Komentar TikTok"];
+                else if (currentService === "WhatsApp" && currentCategory === "Pengikut/Member") jenisOptions = ["WhatsApp Member"];
+                else if (currentService === "Instagram" && currentCategory === "Follower") jenisOptions = ["Follower Instagram", "Follower Indo REFFIL", "Follower Indo No REFFIL"];
+                else if (currentService === "Instagram" && currentCategory === "Likes") jenisOptions = ["Likes Instagram"];
+                else if (currentService === "Instagram" && currentCategory === "Views") jenisOptions = ["Views Instagram"];
+                else if (currentService === "Instagram" && currentCategory === "Komentar") jenisOptions = ["Komentar Instagram"];
+                else if (currentService === "Telegram" && currentCategory === "Pengikut/Member") jenisOptions = ["Telegram No Reffil", "Telegram Reffil 30 days"];
+                else if (currentService === "YouTube" && currentCategory === "Likes") jenisOptions = ["Likes YouTube"];
+                else if (currentService === "YouTube" && currentCategory === "Views") jenisOptions = ["Views YouTube"];
+                else jenisOptions = ["—"];
+
+                renderJenisOptions(jenisOptions);
+                // jika jenisOptions berisi dan currentJenis tidak ada di dalamnya, set ke pertama
+                if (jenisOptions.length && !jenisOptions.includes(currentJenis)) {
+                    currentJenis = jenisOptions[0];
+                } else if (jenisOptions.length === 0) currentJenis = "—";
+                previewJenis.textContent = currentJenis;
+
+                // load tabel
+                loadPriceTable();
+
+                // quick preview (5 baris pertama)
+                updateQuickPreview();
+            }
+
+            function renderJenisOptions(options) {
                 jenisListDiv.innerHTML = '';
                 options.forEach(opt => {
-                    const div = document.createElement('div');
-                    div.className = 'jenis-item';
-                    div.innerText = opt;
-                    if (opt === currentJenis) div.style.background = '#cbb295';
-                    div.addEventListener('click', () => {
+                    if (opt === "—") return;
+                    const span = document.createElement('span');
+                    span.className = `jenis-item ${currentJenis === opt ? 'selected' : ''}`;
+                    span.textContent = opt;
+                    span.addEventListener('click', (e) => {
+                        document.querySelectorAll('.jenis-item').forEach(j => j.classList.remove('selected'));
+                        span.classList.add('selected');
                         currentJenis = opt;
-                        document.querySelectorAll('.jenis-item').forEach(el => el.style.background = 'white');
-                        div.style.background = '#cbb295';
-                        document.getElementById('showJenis').innerText = currentJenis;
-                        renderPriceTable();
+                        previewJenis.textContent = opt;
+                        loadPriceTable();
+                        updateQuickPreview();
                     });
-                    jenisListDiv.appendChild(div);
+                    jenisListDiv.appendChild(span);
                 });
-            } else {
-                hint.style.display = 'block';
-                jenisListDiv.innerHTML = '';
             }
-        }
 
-        function renderPriceTable() {
-            const key = currentService + '_' + currentCategory;
-            const data = priceData[key];
-            const tbody = document.getElementById('tableBody');
-            const showJenisSpan = document.getElementById('showJenis');
-            if (data) {
-                showJenisSpan.innerText = data.jenis || currentJenis;
-                tbody.innerHTML = '';
-                data.paket.forEach(p => {
-                    const row = tbody.insertRow();
-                    row.innerHTML = `<td>${p.jumlah}</td><td>${p.harga}</td>`;
-                    row.addEventListener('click', () => {
-                        document.querySelectorAll('#tableBody tr').forEach(r => r.classList.remove('selected-row'));
-                        row.classList.add('selected-row');
-                        selectedPaket = `${p.jumlah} = ${p.harga}`;
-                        document.getElementById('selectedPaket').innerText = selectedPaket;
+            function loadPriceTable() {
+                const key = getKey(currentService, currentCategory);
+                let dataset = null;
+                if (key && priceData[key]) {
+                    dataset = priceData[key].data;
+                    // pastikan jenis sesuai (optional mapping)
+                } else {
+                    dataset = [[0,"N/A"]]; // fallback
+                }
+
+                tableBody.innerHTML = '';
+                dataset.forEach(row => {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `<td>${row[0]}</td><td>${row[1]}</td>`;
+                    tr.addEventListener('click', () => {
+                        selectedPaket = { jumlah: row[0], harga: row[1] };
+                        selectedDetailSpan.textContent = `${row[0]} ${currentCategory} - ${currentJenis}`;
+                        selectedPriceSpan.textContent = row[1];
+
+                        // update WA link
+                        const text = `Hallo bang poker, saya mau order ${currentJenis} ${row[0]} ${currentCategory} seharga ${row[1]}`;
+                        waOrderLink.href = `https://wa.me/6287780575005?text=${encodeURIComponent(text)}`;
                     });
+                    tableBody.appendChild(tr);
                 });
-            } else {
-                tbody.innerHTML = '<tr><td colspan="2" style="padding:2rem;">Paket belum tersedia</td></tr>';
-                showJenisSpan.innerText = '-';
             }
-            document.getElementById('showLayanan').innerText = currentService;
-            document.getElementById('showKategori').innerText = currentCategory;
-        }
 
-        // Event listeners
-        document.querySelectorAll('.service-btn').forEach(btn => {
-            btn.addEventListener('click', e => {
-                document.querySelectorAll('.service-btn').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                currentService = btn.dataset.service;
-                // reset jenis sesuai
-                currentJenis = getJenisOptions(currentService, currentCategory)[0] || currentService;
-                renderJenis();
-                renderPriceTable();
+            function updateQuickPreview() {
+                const key = getKey(currentService, currentCategory);
+                let dataset = (key && priceData[key]) ? priceData[key].data.slice(0,5) : [];
+                let html = '<table style="width:100%; color:white;"><tr><th>Jumlah</th><th>Harga</th></tr>';
+                dataset.forEach(r => { html += `<tr><td>${r[0]}</td><td>${r[1]}</td></tr>`; });
+                html += '</table>';
+                quickPreviewDiv.innerHTML = dataset.length ? html : '<p>—</p>';
+            }
+
+            // event listeners layanan
+            srvBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    srvBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    currentService = btn.dataset.service;
+                    // reset category to yg masuk akal
+                    if (currentService === 'WhatsApp' && currentCategory !== 'Pengikut/Member') currentCategory = 'Pengikut/Member';
+                    if (currentService === 'Telegram' && currentCategory !== 'Pengikut/Member') currentCategory = 'Pengikut/Member';
+                    if (currentService === 'YouTube' && !['Likes','Views'].includes(currentCategory)) currentCategory = 'Likes';
+                    if (currentService === 'TikTok' && !['Follower','Likes','Views','Komentar'].includes(currentCategory)) currentCategory = 'Follower';
+                    if (currentService === 'Instagram' && !['Follower','Likes','Views','Komentar'].includes(currentCategory)) currentCategory = 'Follower';
+
+                    // sinkronisasi tombol kategori active
+                    catBtns.forEach(c => {
+                        const cat = c.dataset.category;
+                        if (currentService === 'WhatsApp' || currentService === 'Telegram') {
+                            if (cat === 'Pengikut/Member') c.classList.add('active'); else c.classList.remove('active');
+                        } else if (currentService === 'YouTube') {
+                            if (cat === 'Likes' || cat === 'Views') {
+                                if (cat === currentCategory) c.classList.add('active'); else c.classList.remove('active');
+                            } else c.classList.remove('active');
+                        } else {
+                            if (cat === currentCategory) c.classList.add('active'); else c.classList.remove('active');
+                        }
+                    });
+                    updateUI();
+                });
             });
-        });
 
-        document.querySelectorAll('.cat-btn').forEach(btn => {
-            btn.addEventListener('click', e => {
-                document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                currentCategory = btn.dataset.cat;
-                currentJenis = getJenisOptions(currentService, currentCategory)[0] || currentService;
-                renderJenis();
-                renderPriceTable();
+            catBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const cat = btn.dataset.category;
+                    // validasi layanan vs kategori
+                    if (currentService === 'WhatsApp' && cat !== 'Pengikut/Member') return;
+                    if (currentService === 'Telegram' && cat !== 'Pengikut/Member') return;
+                    if (currentService === 'YouTube' && !(cat === 'Likes' || cat === 'Views')) return;
+                    if ((currentService === 'TikTok' || currentService === 'Instagram') && !['Follower','Likes','Views','Komentar'].includes(cat)) return;
+
+                    catBtns.forEach(c => c.classList.remove('active'));
+                    btn.classList.add('active');
+                    currentCategory = cat;
+                    updateUI();
+                });
             });
-        });
 
-        // initial render
-        renderJenis();
-        renderPriceTable();
+            // copy preview
+            copyBtn.addEventListener('click', () => {
+                const text = `Layanan: ${currentService}, Kategori: ${currentCategory}, Jenis: ${currentJenis}, Paket: ${selectedPaket.jumlah || '—'} harga ${selectedPaket.harga || '—'}`;
+                navigator.clipboard?.writeText(text).then(() => alert('Copied!'));
+            });
 
-        // update WA link (optional tambah text)
-        document.getElementById('waOrderBtn').addEventListener('click', (e) => {
-            // biarkan default href
-        });
+            // set default active
+            updateUI();
 
-    })();
-</script>
-
-<!-- gaya tambahan untuk memastikan border putih dan kotak transparan terlihat -->
-<style>
-    .panel, .price-table-section, .wa-button, .footer-credit, .gambar-placeholder, .welcome-screen {
-        box-shadow: 0 8px 0 #8f6f4b, 0 6px 16px rgba(70,40,10,0.2);
-    }
-    .service-btn, .cat-btn, .jenis-item {
-        transition: 0.1s linear;
-    }
-    .price-table tr:active {
-        background: #ad8b62;
-    }
-    #showLayanan, #showKategori, #showJenis {
-        font-weight: 800;
-        color: #542f0f;
-    }
-</style>
+            // default WA link
+            waOrderLink.href = "https://wa.me/6287780575005?text=hallo%20bang%20poker%20order%20suntik%20all%20sosmed";
+        })();
+    </script>
 </body>
 </html>
